@@ -60,13 +60,15 @@
 
           <!-- Корзина -->
           <button class="flex flex-col items-center text-gray-600 hover:text-gray-800 relative">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-            </svg>
-            <span class="text-xs mt-1">Корзина</span>
-            <span class="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              5
-            </span>
+            <router-link to="/cart" class="flex flex-col items-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+              </svg>
+              <span class="text-xs mt-1">Корзина</span>
+              <span class="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {{ cartItemsCount }}
+              </span>
+            </router-link>
           </button>
 
           <!-- Профиль -->
@@ -91,6 +93,20 @@ export default {
   components: {
     CitySelector,
     CatalogMenu
+  },
+  data() {
+    return {
+      cartItemsCount: 0
+    }
+  },
+  methods: {
+    updateCartCount() {
+      // TODO: Получать реальное количество товаров из хранилища
+      this.cartItemsCount = 3
+    }
+  },
+  mounted() {
+    this.updateCartCount()
   }
 }
 </script>
