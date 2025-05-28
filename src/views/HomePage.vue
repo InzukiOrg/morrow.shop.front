@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import PromoCarousel from '../components/PromoCarousel.vue'
-import PopularProducts from '../components/PopularProducts.vue'
+import PromoCarousel from '@/components/ui/PromoCarousel.vue'
+import PopularProducts from '@/components/catalog/PopularProducts.vue'
 
 export default {
   name: 'HomePage',

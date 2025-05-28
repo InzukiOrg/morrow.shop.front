@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full">
+  <div
+    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full relative"
+  >
     <!-- Изображение товара -->
     <div class="relative">
       <router-link :to="'/product/' + product.id" class="block">
@@ -38,8 +40,10 @@
           <span class="text-xl font-bold text-gray-800">{{ formatPrice(product.price) }} ₽</span>
           <span v-if="product.discount" class="text-sm text-gray-400 line-through">{{ formatPrice(product.oldPrice) }} ₽</span>
         </div>
-        <button 
+        <button
+          v-if="!isInCart"
           @click="addToCart"
+          type="button"
           class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,12 +51,25 @@
           </svg>
           <span>В корзину</span>
         </button>
+        <router-link
+          v-else
+          to="/cart"
+          class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg flex items-center space-x-2 cursor-pointer hover:bg-gray-400 transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          <span>В корзине</span>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { useCartStore } from '@/stores/cart'
+import { computed } from 'vue'
+
 export default {
   name: 'ProductCard',
   props: {
@@ -61,12 +78,25 @@ export default {
       required: true
     }
   },
-  methods: {
-    formatPrice(price) {
+  setup(props) {
+    const cartStore = useCartStore()
+
+    const isInCart = computed(() => {
+      return cartStore.items.some(item => item.id === props.product.id)
+    })
+
+    const addToCart = () => {
+      cartStore.addToCart(props.product.id)
+    }
+
+    const formatPrice = (price) => {
       return new Intl.NumberFormat('ru-RU').format(price)
-    },
-    addToCart() {
-      this.$emit('add-to-cart', this.product)
+    }
+
+    return {
+      isInCart,
+      addToCart,
+      formatPrice
     }
   }
 }

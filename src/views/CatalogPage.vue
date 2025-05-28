@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ProductCatalog from '../components/ProductCatalog.vue'
+import ProductCatalog from '@/components/catalog/ProductCatalog.vue'
 
 export default {
   name: 'CatalogPage',

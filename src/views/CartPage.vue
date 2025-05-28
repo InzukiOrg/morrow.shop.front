@@ -83,72 +83,67 @@
             </div>
           </div>
 
-          <button 
-            @click="checkout"
-            class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          <router-link
+            to="/checkout"
+            class="w-full block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-center text-lg font-semibold mb-2"
           >
             Оформить заказ
-          </button>
+          </router-link>
         </div>
       </div>
     </div>
+    <RecentlyViewed />
   </div>
 </template>
 
 <script>
+import { useCartStore } from '@/stores/cart'
+import { computed, onMounted } from 'vue'
+import RecentlyViewed from '@/components/catalog/RecentlyViewed.vue'
+
 export default {
   name: 'CartPage',
-  data() {
-    return {
-      cartItems: [
-        {
-          id: 1,
-          name: 'Футболка "Морровинд"',
-          description: 'Хлопковая футболка с принтом из игры The Elder Scrolls III: Morrowind',
-          price: 1999,
-          image: 'https://via.placeholder.com/150',
-          quantity: 1
-        },
-        {
-          id: 2,
-          name: 'Кепка "Даггерфолл"',
-          description: 'Кепка с логотипом The Elder Scrolls II: Daggerfall',
-          price: 1499,
-          image: 'https://via.placeholder.com/150',
-          quantity: 2
-        }
-      ]
-    }
+  components: {
+    RecentlyViewed
   },
-  computed: {
-    totalItems() {
-      return this.cartItems.reduce((total, item) => total + item.quantity, 0)
-    },
-    subtotal() {
-      return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0)
-    }
-  },
-  methods: {
-    formatPrice(price) {
+  setup() {
+    const cartStore = useCartStore()
+    onMounted(() => {
+      cartStore.initCart()
+    })
+
+    const cartItems = computed(() => cartStore.cartItems)
+    const totalItems = computed(() => cartStore.itemCount)
+    const subtotal = computed(() => cartStore.total)
+
+    const formatPrice = (price) => {
       return new Intl.NumberFormat('ru-RU').format(price)
-    },
-    increaseQuantity(item) {
-      item.quantity++
-    },
-    decreaseQuantity(item) {
+    }
+
+    const increaseQuantity = (item) => {
+      cartStore.updateQuantity(item.id, item.quantity + 1)
+    }
+    const decreaseQuantity = (item) => {
       if (item.quantity > 1) {
-        item.quantity--
+        cartStore.updateQuantity(item.id, item.quantity - 1)
       }
-    },
-    removeFromCart(item) {
-      const index = this.cartItems.indexOf(item)
-      if (index > -1) {
-        this.cartItems.splice(index, 1)
-      }
-    },
-    checkout() {
-      // TODO: Реализовать оформление заказа
+    }
+    const removeFromCart = (item) => {
+      cartStore.removeFromCart(item.id)
+    }
+    const checkout = () => {
       alert('Функционал оформления заказа будет добавлен позже')
+    }
+
+    return {
+      cartItems,
+      totalItems,
+      subtotal,
+      formatPrice,
+      increaseQuantity,
+      decreaseQuantity,
+      removeFromCart,
+      checkout
     }
   }
 }

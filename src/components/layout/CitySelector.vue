@@ -2,15 +2,15 @@
   <div class="relative">
     <button 
       @click="toggleDropdown"
-      class="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors"
+      class="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors w-36 flex-nowrap"
     >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-5 h-5 min-w-[20px] min-h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
       </svg>
-      <span>{{ selectedCity }}</span>
+      <span class="block flex-1 truncate">{{ selectedCity }}</span>
       <svg 
-        class="w-4 h-4 transition-transform"
+        class="w-4 h-4 min-w-[16px] min-h-[16px] transition-transform"
         :class="{ 'transform rotate-180': isOpen }"
         fill="none" 
         stroke="currentColor" 
@@ -49,20 +49,21 @@
       <div class="max-h-64 overflow-y-auto">
         <div class="py-1">
           <!-- Популярные города -->
-          <div class="px-3 py-2">
-            <h3 class="text-sm font-medium text-gray-500">Популярные города</h3>
-          </div>
-          <button
-            v-for="city in popularCities"
-            :key="city"
-            @click="selectCity(city)"
-            class="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100 transition-colors"
-          >
-            {{ city }}
-          </button>
-
-          <!-- Разделитель -->
-          <div class="border-t my-2"></div>
+          <template v-if="!searchQuery">
+            <div class="px-3 py-2">
+              <h3 class="text-sm font-medium text-gray-500">Популярные города</h3>
+            </div>
+            <button
+              v-for="city in popularCities"
+              :key="city"
+              @click="selectCity(city)"
+              class="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100 transition-colors"
+            >
+              {{ city }}
+            </button>
+            <!-- Разделитель -->
+            <div class="border-t my-2"></div>
+          </template>
 
           <!-- Все города -->
           <div class="px-3 py-2">
@@ -95,7 +96,9 @@ export default {
         'Санкт-Петербург',
         'Новосибирск',
         'Екатеринбург',
-        'Казань'
+        'Казань',
+        'Челябинск',
+        'Пенза'
       ],
       allCities: [
         'Москва',
@@ -112,7 +115,8 @@ export default {
         'Красноярск',
         'Воронеж',
         'Пермь',
-        'Волгоград'
+        'Волгоград',
+        'Пенза'
       ]
     }
   },
@@ -133,9 +137,15 @@ export default {
       this.selectedCity = city
       this.isOpen = false
       this.searchQuery = ''
+      localStorage.setItem('selectedCity', city)
     }
   },
   mounted() {
+    // Восстанавливаем город из localStorage
+    const savedCity = localStorage.getItem('selectedCity')
+    if (savedCity) {
+      this.selectedCity = savedCity
+    }
     // Закрытие выпадающего меню при клике вне его
     document.addEventListener('click', (e) => {
       if (!this.$el.contains(e.target)) {
