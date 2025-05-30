@@ -4,7 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/morrow.shop/',
+  base: '/',
   server: {
     host: true,
     port: 5173,
