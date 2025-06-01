@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-[400px] overflow-hidden">
+  <div class="relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] overflow-hidden">
     <!-- Карусель -->
     <div 
       class="flex transition-transform duration-500 ease-in-out h-full"
@@ -16,10 +16,10 @@
           class="w-full h-full object-cover"
         />
         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <div class="text-center text-white p-6">
-            <h2 class="text-4xl font-bold mb-4">{{ slide.title }}</h2>
-            <p class="text-xl mb-6">{{ slide.description }}</p>
-            <button class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg transition-colors duration-200">
+          <div class="text-center text-white p-4 sm:p-6">
+            <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-4">{{ slide.title }}</h2>
+            <p class="text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6">{{ slide.description }}</p>
+            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 rounded-lg text-sm sm:text-base md:text-lg transition-colors duration-200">
               Подробнее
             </button>
           </div>
@@ -30,28 +30,28 @@
     <!-- Стрелки навигации -->
     <button 
       @click="prevSlide"
-      class="absolute left-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 transition-all duration-200"
+      class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-1.5 sm:p-2 transition-all duration-200"
     >
-      <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-4 h-4 sm:w-6 sm:h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
       </svg>
     </button>
     <button 
       @click="nextSlide"
-      class="absolute right-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-2 transition-all duration-200"
+      class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 rounded-full p-1.5 sm:p-2 transition-all duration-200"
     >
-      <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-4 h-4 sm:w-6 sm:h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
       </svg>
     </button>
 
     <!-- Индикаторы -->
-    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+    <div class="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex space-x-1.5 sm:space-x-2">
       <button 
         v-for="(_, index) in slides" 
         :key="index"
         @click="currentSlide = index"
-        class="w-3 h-3 rounded-full transition-all duration-200"
+        class="w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-200"
         :class="currentSlide === index ? 'bg-white scale-125' : 'bg-white bg-opacity-50'"
       ></button>
     </div>

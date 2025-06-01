@@ -1,27 +1,56 @@
 <template>
   <div v-if="recentProducts.length" class="mt-12">
     <h2 class="text-xl font-bold mb-4">Вы недавно смотрели</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-      <ProductCard v-for="item in recentProducts" :key="item.id" :product="item" />
-    </div>
+    <ProductCarousel :products="recentProducts" />
   </div>
 </template>
 
 <script>
 import { computed, onMounted } from 'vue'
 import { useRecentlyViewedStore } from '@/stores/recentlyViewed.js'
-import ProductCard from './ProductCard.vue'
+import ProductCarousel from './ProductCarousel.vue'
 
 export default {
   name: 'RecentlyViewed',
-  components: { ProductCard },
+  components: { 
+    ProductCarousel
+  },
   setup() {
     const recentlyViewed = useRecentlyViewedStore()
+    
     onMounted(() => {
       recentlyViewed.init()
     })
+    
     const recentProducts = computed(() => recentlyViewed.items)
+    
     return { recentProducts }
   }
 }
-</script> 
+</script>
+
+<style scoped>
+/* Скрываем стандартный скроллбар */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Плавная прокрутка */
+.overflow-x-auto {
+  scroll-behavior: smooth;
+}
+
+/* Эффект снэпа для лучшего UX */
+.overflow-x-auto {
+  scroll-snap-type: x mandatory;
+}
+
+.overflow-x-auto > div > div {
+  scroll-snap-align: start;
+}
+</style> 

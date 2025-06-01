@@ -99,9 +99,7 @@
     <!-- Похожие товары -->
     <div v-if="relatedProducts.length" class="mt-12">
       <h2 class="text-2xl font-bold mb-6">Похожие товары</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        <ProductCard v-for="item in relatedProducts" :key="item.id" :product="item" />
-      </div>
+      <ProductCarousel :products="relatedProducts" />
     </div>
   </div>
 </template>
@@ -111,12 +109,14 @@ import { useCartStore } from '@/stores/cart'
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { products, brandsByCategory, categories } from '@/data.js'
-import ProductCard from './ProductCard.vue'
+import ProductCarousel from './ProductCarousel.vue'
 import { useRecentlyViewedStore } from '@/stores/recentlyViewed.js'
 
 export default {
   name: 'ProductDetail',
-  components: { ProductCard },
+  components: { 
+    ProductCarousel
+  },
   setup() {
     const route = useRoute()
     const cartStore = useCartStore()
@@ -184,14 +184,17 @@ export default {
         .filter(p => p.category === product.value.category && p.id !== product.value.id)
         .slice(0, 4)
     })
+
     onMounted(() => {
       cartStore.initCart()
       recentlyViewed.init()
+      
       // Добавляем товар в недавно просмотренные
       if (product.value) {
         recentlyViewed.add(product.value.id)
       }
     })
+
     return {
       product,
       brand,

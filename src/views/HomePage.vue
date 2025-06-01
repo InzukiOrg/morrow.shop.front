@@ -1,7 +1,8 @@
 <template>
-  <div class="min-h-screen bg-gray-100">
+  <div class="min-h-screen">
     <div class="container mx-auto px-4 py-8">
       <PromoCarousel class="mb-8" />
+      <PopularCategories />
       <PopularProducts />
       <h1 class="text-4xl font-bold text-center my-8">Добро пожаловать в Morrow Shop</h1>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -25,12 +26,14 @@
 <script>
 import PromoCarousel from '@/components/ui/PromoCarousel.vue'
 import PopularProducts from '@/components/catalog/PopularProducts.vue'
+import PopularCategories from '../components/catalog/PopularCategories.vue';
 
 export default {
   name: 'HomePage',
   components: {
     PromoCarousel,
-    PopularProducts
+    PopularProducts,
+    PopularCategories
   }
 }
 </script> 

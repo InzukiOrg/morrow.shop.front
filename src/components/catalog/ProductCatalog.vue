@@ -102,7 +102,13 @@
         </div>
 
         <!-- Сетка товаров -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Мобильная версия (до md экранов) -->
+        <div class="block md:hidden">
+          <ProductGridMobile :products="filteredProducts" @add-to-cart="handleAddToCart" />
+        </div>
+        
+        <!-- Десктопная версия (от md экранов) -->
+        <div class="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product"
             @add-to-cart="handleAddToCart" />
         </div>
@@ -113,6 +119,7 @@
 
 <script>
 import ProductCard from './ProductCard.vue'
+import ProductGridMobile from './ProductGridMobile.vue'
 import CategoryMenu from './CategoryMenu.vue'
 import { categories, brandsByCategory, products } from '../../data.js'
 import { filterConfig } from '../../filterConfig.js'
@@ -121,6 +128,7 @@ export default {
   name: 'ProductCatalog',
   components: {
     ProductCard,
+    ProductGridMobile,
     CategoryMenu
   },
   data() {

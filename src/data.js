@@ -3,6 +3,7 @@ export const categories = [
     id: 1,
     slug: 'elektronika',
     name: 'Электроника',
+    popular: true,
     children: [
       {
         id: 2,
@@ -21,6 +22,7 @@ export const categories = [
     id: 10,
     slug: 'odezhda',
     name: 'Одежда',
+    popular: true,
     children: [
       {
         id: 11,
@@ -44,6 +46,7 @@ export const categories = [
     id: 30,
     slug: 'sport',
     name: 'Спорт и отдых',
+    popular: true,
     children: [
       { id: 31, slug: 'sportivnoe-pitanie', name: 'Спортивное питание' }
     ]
@@ -82,7 +85,6 @@ export const products = [
     category: 6, // Смартфоны
     brand: 2, // Bandigo
     rating: 4.7,
-    popular: true
   },
   {
     id: 2,
@@ -96,17 +98,17 @@ export const products = [
     size: ['S', 'M', 'L', 'XL'],
     color: 'Белый',
     gender: 'Унисекс',
-    popular: true
   },
   {
     id: 3,
     name: 'Sarkong Гейнер',
     description: 'Высококалорийный гейнер Sarkong для быстрого набора массы. Отлично растворяется, содержит витамины и минералы.',
     price: 2490,
-    image: 'https://via.placeholder.com/300x300?text=Sarkong+Gainer',
+    image: '/assets/images/demo/product_3.png',
     category: 31, // Спортивное питание
     brand: 11, // Sarkong
-    rating: 4.8
+    rating: 4.8,
+    popular: true
   },
   {
     id: 4,
@@ -117,7 +119,6 @@ export const products = [
     category: 31, // Спортивное питание
     brand: 11, // Sarkong
     rating: 4.9,
-    popular: true
   },
   {
     id: 5,
@@ -144,17 +145,18 @@ export const products = [
     name: 'Bandigo Последний додеп',
     description: 'История о том, как пагубно влияют азартные игры на жизнь человека. Главный герой теряет всё, но находит в себе силы начать заново и предостеречь других от этой опасности.',
     price: 590,
-    image: 'https://via.placeholder.com/300x300?text=Bandigo+Book',
+    image: '/assets/images/demo/product_7.png',
     category: 20, // Книги
     brand: 2, // Bandigo
-    rating: 4.4
+    rating: 4.4,
+    popular: true
   },
   {
     id: 8,
     name: 'Пин Morrow Club',
     description: 'Эксклюзивный металлический пин для участников Morrow Club. Стильный аксессуар для одежды и рюкзака.',
     price: 390,
-    image: 'https://via.placeholder.com/300x300?text=Morrow+Club+Pin',
+    image: '/assets/images/demo/product_8.png',
     category: 12, // Пины
     brand: 1, // MorrowsTech
     rating: 4.9,

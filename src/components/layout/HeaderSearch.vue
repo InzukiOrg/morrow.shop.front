@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex-1 max-w-2xl mx-4" ref="searchRoot">
+  <div class="relative flex-1 max-w-2xl ml-4" ref="searchRoot">
     <div class="relative">
       <input
         v-model="searchQuery"
