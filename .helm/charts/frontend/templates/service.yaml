@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: morrow-clusterip
+  namespace: dev-morrow_shop 
+spec:
+  type: ClusterIP 
+  selector:
+    app: frontend
+  ports:
+    - port: 80 
+        name: http
+        targetPort: 5173 
+    - port: 443 
+        name: https
+        targetPort: 5173

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.cilium.io/force-https: enabled
+    ingress.cilium.io/loadbalancer-mode: shared
+    ingress.cilium.io/tls-passthrough: enabled
+  name: morrow-ingress
+  namespace: dev-morrow_shop
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: shop.lengirt.ru
+    http:
+      paths:
+      - backend:
+          service:
+            name: shop-server
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - shop.lengirt.ru
+    secretName: shop-secret
