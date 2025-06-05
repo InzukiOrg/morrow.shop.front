@@ -6,7 +6,7 @@ metadata:
     ingress.cilium.io/loadbalancer-mode: shared
     ingress.cilium.io/tls-passthrough: enabled
   name: morrow-ingress
-  namespace: dev-morrow_shop
+  namespace: dev-morrowshop
 spec:
   ingressClassName: cilium
   rules:

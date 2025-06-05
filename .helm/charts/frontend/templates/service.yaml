@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: morrow-clusterip
-  namespace: dev-morrow_shop 
+  namespace: dev-morrowshop 
 spec:
   type: ClusterIP 
   selector:
