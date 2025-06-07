@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
-  namespace: dev-morrowshop # Deployment is a namespaced resource
+  name: {{ $.Chart.Name }}-deployment
+  namespace: morrow-shop # Deployment is a namespaced resource
   labels:
-    app: frontend
+    app: {{ $.Chart.Name }}
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: frontend
+      app: {{ $.Chart.Name }}
   template:
     metadata:
       labels:
-        app: frontend
+        app: {{ $.Chart.Name }}
     spec:
       containers:
-        - name: frontend
+        - name: {{ $.Chart.Name }}
           image: {{ .Values.werf.image.frontend }}
           ports:
-            - containerPort: 5173
+            - containerPort: 8080
           resources:
             requests:
               cpu: {{ $.Values.requests.cpu }}
@@ -32,7 +32,7 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /healthz?full=true
-              port: 5173
+              port: 8080
               scheme: HTTP
             initialDelaySeconds: 3
             periodSeconds: 30
@@ -42,9 +42,11 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /healthz
-              port: 5173
+              port: 8080
               scheme: HTTP
             initialDelaySeconds: 3
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 1
+      imagePullSecrets:
+      - name: regcred

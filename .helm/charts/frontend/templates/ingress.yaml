@@ -4,9 +4,8 @@ metadata:
   annotations:
     ingress.cilium.io/force-https: enabled
     ingress.cilium.io/loadbalancer-mode: shared
-    ingress.cilium.io/tls-passthrough: enabled
-  name: morrow-ingress
-  namespace: dev-morrowshop
+  name: {{ $.Chart.Name }}-ingress
+  namespace: morrow-shop
 spec:
   ingressClassName: cilium
   rules:
@@ -15,7 +14,7 @@ spec:
       paths:
       - backend:
           service:
-            name: shop-server
+            name: {{ $.Chart.Name }}-svc
             port:
               number: 80
         path: /
@@ -23,4 +22,4 @@ spec:
   tls:
   - hosts:
     - shop.lengirt.ru
-    secretName: shop-secret
+    secretName: lengirt-cert
