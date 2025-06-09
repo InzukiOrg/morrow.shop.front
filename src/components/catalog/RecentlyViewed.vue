@@ -27,7 +27,7 @@ export default {
     return { recentProducts }
   }
 }
-</script>
+</script> 
 
 <style scoped>
 /* Скрываем стандартный скроллбар */
