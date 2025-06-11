@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $.Chart.Name }}-deployment
+  labels:
+    app: {{ $.Chart.Name }}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ $.Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $.Chart.Name }}
+    spec:
+      containers:
+        - name: {{ $.Chart.Name }}
+          image: {{ .Values.werf.image.frontend }}
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: {{ $.Values.requests.cpu }}
+              memory: {{ $.Values.requests.memory }}
+            limits:
+              cpu: {{ $.Values.limits.cpu }}
+              memory: {{ $.Values.limits.memory }}
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz?full=true
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 1
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+              - KILL
+              - MKNOD
+              - SETGID
+              - SETUID
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsUser: 1000
+            runAsNonRoot: true
+            runAsGroup: 1000
+          volumeMounts:
+          - name: nginx-cache
+            mountPath: /var/cache/nginx
+          - name: nginx-tmp
+            mountPath: /var/run
+          - name: nginx-config-volume
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
+      volumes:
+        - name: nginx-cache
+          emptyDir: {}
+        - name: nginx-tmp
+          emptyDir: {}
+        - name: nginx-config-volume
+          configMap:
+            name: nginx-config
+      imagePullSecrets:
+      - name: regcred
+    

@@ -1,0 +1,38 @@
+# werf.yaml
+project: morrow-shop
+configVersion: 1
+
+##
+# Frontend
+##
+---
+image: build_frontend
+from: node:20-alpine
+git:
+- add: /
+  to: /app
+shell:
+  install:
+  - cd /app
+  - npm install
+  - npm cache clean --force
+  - npm run build
+
+---
+image: frontend
+from: nginx:stable-alpine
+shell:
+  setup:
+  - rm -rf /usr/share/nginx/html/*
+  - adduser -D -u 1000 appuser
+import:
+- image: build_frontend
+  add: /app/dist 
+  to: /usr/share/nginx/html
+  after: setup
+imageSpec:
+  clearHistory: true
+  config:
+    user: "1000"
+    expose: ["8080"]
+    cmd: ["nginx", "-g", "daemon off;"]
