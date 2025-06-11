@@ -1,0 +1,6 @@
+dependencies:
+- name: frontend
+  repository: ""
+  version: 0.1.0
+digest: sha256:d1bfdbbc4bd31e61091a950a3c6d3e0ec6940241642c6f6e12553d5b25fbc24b
+generated: "2025-06-11T20:50:25.013502031+03:00"
