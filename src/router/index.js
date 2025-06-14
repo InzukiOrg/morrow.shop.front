@@ -4,6 +4,9 @@ import CatalogPage from '../views/CatalogPage.vue'
 import ProductPage from '../views/ProductPage.vue'
 import CartPage from '../views/CartPage.vue'
 import ProfilePage from '../components/profile/ProfilePage.vue'
+import FavoritesPage from '../components/profile/FavoritesPage.vue'
+import DeliveryPage from '../components/checkout/DeliveryPage.vue'
+import OrdersPage from '../components/orders/OrdersPage.vue'
 
 const routes = [
   {
@@ -27,6 +30,16 @@ const routes = [
     component: CartPage
   },
   {
+    path: '/delivery',
+    name: 'delivery',
+    component: DeliveryPage
+  },
+  {
+    path: '/orders',
+    name: 'orders',
+    component: OrdersPage
+  },
+  {
     path: '/checkout',
     name: 'checkout',
     component: () => import('@/views/Checkout.vue')
@@ -35,6 +48,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: ProfilePage
+  },
+  {
+    path: '/favorites',
+    name: 'favorites',
+    component: FavoritesPage
   }
 ]
 

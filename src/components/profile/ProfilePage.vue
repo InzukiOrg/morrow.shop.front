@@ -28,7 +28,7 @@
         <a v-for="tab in ['profile', 'orders', 'favorites', 'settings']" 
            :key="tab"
            :class="['tab', { 'tab-active': activeTab === tab }]"
-           @click="activeTab = tab">
+           @click="handleTabClick(tab)">
           {{ tab === 'profile' ? 'Профиль' : 
              tab === 'orders' ? 'Заказы' :
              tab === 'favorites' ? '❤️' : '⚙️' }}
@@ -221,7 +221,7 @@
               <a v-for="tab in ['profile', 'orders', 'favorites', 'settings']" 
                  :key="tab"
                  :class="['btn btn-ghost justify-start gap-2', { 'btn-active': activeTab === tab }]"
-                 @click="activeTab = tab">
+                 @click="handleTabClick(tab)">
                 <svg v-if="tab === 'profile'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -429,7 +429,7 @@ export default {
         lastName: 'Иванов',
         email: 'ivan@example.com',
         phone: '+7 (999) 123-45-67',
-        avatar: 'https://i.pravatar.cc/150?img=1',
+        avatar: 'https://i.pravatar.cc/300',
         address: {
           street: 'ул. Пушкина, д. 10',
           city: 'Москва',
@@ -445,6 +445,13 @@ export default {
     }
   },
   methods: {
+    handleTabClick(tab) {
+      if (tab === 'favorites') {
+        this.$router.push('/favorites')
+      } else {
+        this.activeTab = tab
+      }
+    },
     startEditing() {
       this.editedProfile = { ...this.profile }
       this.isEditing = true
