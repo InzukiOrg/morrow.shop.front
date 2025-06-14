@@ -2,20 +2,19 @@
     <div class="lg:hidden pb-4">
         <!-- Верхняя полоса с фильтрами -->
         <div class="flex items-center justify-between">
-            <button @click="openCategory" class="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                <span>Категории</span>
-            </button>
             <button @click="openSort" class="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
                 </svg>
-                <span>Сортировка</span>
+            </button>
+            <button @click="openCategory" class="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <span>Категории</span>
             </button>
             <button @click="openFilters" class="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"

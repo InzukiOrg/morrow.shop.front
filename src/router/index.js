@@ -3,6 +3,7 @@ import HomePage from '../views/HomePage.vue'
 import CatalogPage from '../views/CatalogPage.vue'
 import ProductPage from '../views/ProductPage.vue'
 import CartPage from '../views/CartPage.vue'
+import ProfilePage from '../components/profile/ProfilePage.vue'
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
     path: '/checkout',
     name: 'checkout',
     component: () => import('@/views/Checkout.vue')
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfilePage
   }
 ]
 
