@@ -13,14 +13,14 @@
                 </button>
             </div>
         </router-link>
-        <router-link to="/promo">
+        <router-link to="/promotions">
             <button @click="scrollToTop">
                 <TagIcon class="h-5 w-5" />
             </button>
         </router-link>
         <router-link to="/cart">
             <div class="indicator">
-                <span class="indicator-item badge badge-secondary">{{ cartItemsCount }}</span>
+                <span class="indicator-item badge badge-secondary badge-sm">{{ cartItemsCount }}</span>
                 <button @click="scrollToTop">
                     <ShoppingCartIcon class="h-5 w-5" />
                 </button>

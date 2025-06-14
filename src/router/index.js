@@ -3,10 +3,12 @@ import HomePage from '../views/HomePage.vue'
 import CatalogPage from '../views/CatalogPage.vue'
 import ProductPage from '../views/ProductPage.vue'
 import CartPage from '../views/CartPage.vue'
+import Checkout from '../views/Checkout.vue'
 import ProfilePage from '../components/profile/ProfilePage.vue'
 import FavoritesPage from '../components/profile/FavoritesPage.vue'
 import DeliveryPage from '../components/checkout/DeliveryPage.vue'
 import OrdersPage from '../components/orders/OrdersPage.vue'
+import PromotionsPage from '../components/promotions/PromotionsPage.vue'
 
 const routes = [
   {
@@ -30,19 +32,9 @@ const routes = [
     component: CartPage
   },
   {
-    path: '/delivery',
-    name: 'delivery',
-    component: DeliveryPage
-  },
-  {
-    path: '/orders',
-    name: 'orders',
-    component: OrdersPage
-  },
-  {
     path: '/checkout',
     name: 'checkout',
-    component: () => import('@/views/Checkout.vue')
+    component: Checkout
   },
   {
     path: '/profile',
@@ -53,6 +45,21 @@ const routes = [
     path: '/favorites',
     name: 'favorites',
     component: FavoritesPage
+  },
+  {
+    path: '/delivery',
+    name: 'delivery',
+    component: DeliveryPage
+  },
+  {
+    path: '/orders',
+    name: 'orders',
+    component: OrdersPage
+  },
+  {
+    path: '/promotions',
+    name: 'promotions',
+    component: PromotionsPage
   }
 ]
 
