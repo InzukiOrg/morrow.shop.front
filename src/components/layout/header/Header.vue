@@ -28,12 +28,12 @@
     <!-- Mobile -->
     <div class="lg:hidden bg-base-100 pb-2 rounded-b-lg">
       <div class="flex justify-between items-center w-full px-4">
-        <div class="flex items-center mr-auto">
+        <CitySelector />
+        <div class="flex items-center">
           <router-link to="/" class="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors">
             <span>Morrow Shop</span>
           </router-link>
         </div>
-        <CitySelector />
 
       </div>
       <div class="flex space-x-2 px-4 sticky top-0 z-50">

@@ -1,5 +1,5 @@
 <template>
-    <div class="btm-nav z-50 h-10">
+    <div class="btm-nav z-50 h-12 border-t">
         <router-link to="/">
             <button @click="scrollToTop">
                 <HomeIcon class="h-5 w-5" />

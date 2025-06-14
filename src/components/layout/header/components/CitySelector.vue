@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown lg:dropdown-start dropdown-end">
+  <div class="dropdown dropdown-start">
     <label tabindex="0" class="btn btn-ghost normal-case flex items-center gap-2 px-2 py-1 lg:px-4 lg:py-2">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>

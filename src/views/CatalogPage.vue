@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-100">
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto lg:px-4 lg:py-8 py-2 px-2">
       <h1 class="text-3xl font-bold">Каталог товаров</h1>
       <ProductCatalog />
     </div>
