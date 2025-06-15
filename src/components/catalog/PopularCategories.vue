@@ -3,8 +3,7 @@
         <h2 class="text-2xl font-bold mb-4">Категории</h2>
         <div class="overflow-x-auto">
             <div class="flex gap-4 ">
-
-                <div v-for="category in categories" class="min-w-36 card bg-base-100 image-full lg:w-48 lg:h-36 h-24 shadow-xl">
+                <RouterLink v-for="category in categories" :to="`/catalog/${category.slug}`" class="min-w-36 card bg-base-100 image-full lg:w-48 lg:h-36 h-24 shadow-xl">
                     <figure>
                         <img :src="getCategoryImage(category.slug)" class="w-full" />
                     </figure>
@@ -15,7 +14,7 @@
                             <span class="lg:hidden block text-xl">🔥</span>
                         </div>
                     </div>
-                </div>
+                </RouterLink>
             </div>
         </div>
     </div>
@@ -24,6 +23,7 @@
 <script>
 import { categories } from '@/data.js'
 import { computed } from 'vue';
+import { RouterLink } from 'vue-router';
 
 export default {
     name: 'PopularCategories',
