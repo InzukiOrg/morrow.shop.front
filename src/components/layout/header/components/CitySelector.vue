@@ -3,7 +3,7 @@
     <MapPinIcon class="w-5" />{{ selectedCity }}
   </button>
   <dialog id="cityselector" ref="citySelectorModal" class="modal">
-    <div class="modal-box lg:w-96 w-full lg:min-h-96 min-h-screen lg:h-auto">
+    <div class="modal-box lg:w-96 w-full lg:min-h-96 min-h-screen lg:h-auto lg:rounded-2xl rounded-none">
       <div class="sticky top-0 right-0 bg-white">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-0 top-0" @click="closeModal()">✕</button>        
       </div>
